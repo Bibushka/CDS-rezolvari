@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 	for (std::string line; getline(inputfile, line); )
 		if (line.find(std::string str(s)) != std::npos)
 			i++;
-	std::cout << "Number of lines that contain 'PUBLISH(': " << i << endl;
+	std::cout << "Number of lines that contain"<< s <<": " << i << endl;
 	inputfile.close();
 	std::getchar();
 	return 0;
