@@ -11,8 +11,9 @@ int main(int argc, char* argv[])
 	ifstream inputfile;
 	inputfile.open("isa_gw.txt", ios::in, ios::out);
 	int i = 0;
+	char *s = argv[2];
 	for (std::string line; getline(inputfile, line); )
-		if (line.find("PUBLISH(") != 0)
+		if (line.find(std::string str(s)) != std::npos)
 			i++;
 	std::cout << "Number of lines that contain 'PUBLISH(': " << i << endl;
 	inputfile.close();
