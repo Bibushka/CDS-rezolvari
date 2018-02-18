@@ -1,41 +1,42 @@
-#include "stdafx.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 using namespace std;
 
-void read_write(string argv, int index)
+int checkArgumets(int argc, char* argv[])
 {
-	const string fileName = argv.substr(argv.rfind("/") + 1, string::npos);
+	if (argc == 1)
+		return 0;
+	return 1;
+}
+
+void getTimestampAndNumberOfDevices(string argv)
+{
+	const string fileName = argv;
 	ifstream inputFile;
-	inputFile.open(fileName, ios::in);
-	ofstream outputFile;
-	outputFile.open("out_t" + std::to_string(index) + ".txt");
-	const string deviceNumber = "Nr. devices: ";
-	outputFile << "yo yo";
+	inputFile.open(fileName);
 	for (std::string line; getline(inputFile, line);)
 	{
-		if (line.empty())
-		{
-			getline(inputFile, line);
-			std::cout << line.substr(0, 18) << endl;
-			outputFile << line.substr(0, 18) << endl;
-		}
-		if (line.find(deviceNumber) == 0)
-		{
-			std::cout << line.substr(0, line.find(",") - 1) << endl;
-			outputFile << line.substr(0, line.find(",") - 1) << endl << endl;
-		}
+		if (line.find("Subnet") != std::string::npos)
+			std::cout << line.substr(0, line.find("Subnet") - 2) << endl;
+		if (line.find("Nr. devices: ") == 0)
+			std::cout << line.substr(0, line.find(",")) << endl << endl;
 	}
 	inputFile.close();
 }
 
-
 int main(int argc, char **argv)
 {
-	for (int i = 1; i < argc; i++)
+	if (checkArgumentss(argc, argv) == 0)
 	{
-		read_write(argv[i], i);
+		cout << "Please enter the program arguments as followed:" << endl <<
+			"'program name' 'first input file address' 'second input file address' ... " << endl <<
+			"'n'th input file address', all delimited by one space character:" << endl;
+		exit(0);
+	}
+	for (int argcount = 1; argcount < argc; argcount++)
+	{
+		getTimestampAndNumberOfDevices(argv[argcount]);
 		cout << endl;
 	}
 	return 0;
