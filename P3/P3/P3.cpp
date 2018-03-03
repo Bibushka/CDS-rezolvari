@@ -12,12 +12,13 @@ class Integer {
 
 public:
 	Integer(int value) : number{ value } {}
-	int getNumber() { return number; }
-	void print(int position, int value, char*address) {
-		cout << position << " " << value << " " << address << endl;
-	}
+	int getNumber() 
+		{ return number; }
+	void print(int position) 
+		{cout << position << " " << number << " " << address << endl;	}
 private:
 	int number;
+	char* address;
 };
 
 
