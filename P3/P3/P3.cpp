@@ -1,8 +1,10 @@
 
 // P3.cpp : Defines the entry point for the console application.
 //
-
+#include "stdafx.h"
 #include <iostream>
+#include <list>
+#include <memory>
 
 using namespace std;
 
@@ -10,11 +12,9 @@ using namespace std;
 class Integer {
 
 public:
-	virtual int getValue() const = 0;
+	virtual int getValue() { const = 0; }
 	virtual	void print(int position)
-	{
-		std::cout << position << " " << getValue << " " << this << endl;
-	}
+		{cout << position << " " << getValue << " " << this << endl;}
 };
 
 
@@ -44,15 +44,21 @@ private:
 
 int main()
 {
-
-	std::list<int> objectList(10);
+	list<unique_ptr<Integer>> objectList(10);
 	for (int i = 1; i <= 5; i++)
 	{
-
+		unique_ptr<Integer> a = make_unique<A>(-i);
+		objectList.push_back(a);
+		a->print(-i);
 	}
-	for ()
-		return 0;
+	for (int i = 1; i <= 5; i++)
+	{
+		unique_ptr<Integer> b = make_unique<B>(i);
+		objectList.push_back(b);
+		b->print(i);
 	}
+	return 0;
+}
 
 
 	/*
