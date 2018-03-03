@@ -2,7 +2,6 @@
 // P3.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include <iostream>
 
 using namespace std;
@@ -11,22 +10,26 @@ using namespace std;
 class Integer {
 
 public:
-	Integer(int value) : number{ value } {}
-	int getNumber() 
-		{ return number; }
+	Integer(int value) 
+		{number = value;};
+	int getNumber() const
+		{return number;}
 	void print(int position) 
-		{cout << position << " " << number << " " << address << endl;	}
+		{std :: cout << position << " " << number << " " << this << endl;}
 private:
 	int number;
-	char* address;
 };
 
 
 class A : public Integer {
 
 public:
-	A(int value) : negativNumber(value) : Integer(value) {}
-
+	A(int value)
+		{negativNumber = value;}
+	int geNegativtNumber() const
+		{return negativNumber;}
+	void print(int position)
+		{std::cout << position << " " << negativNumber << " " << this << endl;}
 private:
 	int negativNumber;
 };
@@ -35,10 +38,14 @@ private:
 class B : public Integer {
 
 public:
-	B(int value) : positivNumbers(value) : Integer(value) {}
-
+	B(int value)
+		{positivNumber = value;}
+	int getPositivNumber() const
+		{return positivNumber;}
+	void print(int position)
+		{std::cout << position << " " << positivNumber << " " << this << endl;}
 private:
-	int positivNumbers;
+	int positivNumber;
 };
 
 
@@ -50,7 +57,7 @@ int main()
 	{
 
 	}
-
+	for ()
 		return 0;
 	}
 
