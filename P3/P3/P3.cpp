@@ -10,14 +10,11 @@ using namespace std;
 class Integer {
 
 public:
-	Integer(int value) 
-		{number = value;};
-	int getNumber() const
-		{return number;}
-	void print(int position) 
-		{std :: cout << position << " " << number << " " << this << endl;}
-private:
-	int number;
+	virtual int getValue() const = 0;
+	virtual	void print(int position)
+	{
+		std::cout << position << " " << getValue << " " << this << endl;
+	}
 };
 
 
@@ -26,10 +23,8 @@ class A : public Integer {
 public:
 	A(int value)
 		{negativNumber = value;}
-	int geNegativtNumber() const
+	int getValue()
 		{return negativNumber;}
-	void print(int position)
-		{std::cout << position << " " << negativNumber << " " << this << endl;}
 private:
 	int negativNumber;
 };
@@ -40,12 +35,10 @@ class B : public Integer {
 public:
 	B(int value)
 		{positivNumber = value;}
-	int getPositivNumber() const
+	int getValue()
 		{return positivNumber;}
-	void print(int position)
-		{std::cout << position << " " << positivNumber << " " << this << endl;}
 private:
-	int positivNumber;
+	int unsigned positivNumber;
 };
 
 
