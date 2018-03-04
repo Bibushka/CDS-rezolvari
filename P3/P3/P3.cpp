@@ -12,7 +12,7 @@ using namespace std;
 class Integer {
 
 public:
-	virtual int getValue() const = 0 {}
+	virtual int getValue() const = 0;
 	virtual	void print(int position)
 		{cout << position << " " << this->getValue() << " " << this << endl;}
 };
@@ -44,18 +44,16 @@ private:
 
 int main()
 {
+	int counter = 0;
 	list<unique_ptr<Integer>> objectList(10);
 	for (int i = 1; i <= 5; i++)
-	{
-		unique_ptr<Integer> a = make_unique<A>(-i);
-		objectList.push_back(a);
-		a->print(-i);
-	}
+		objectList.push_back(make_unique<A>(-i));
 	for (int i = 1; i <= 5; i++)
+		objectList.push_back(make_unique<B>(i));
+	for (const auto& object : objectList)
 	{
-		unique_ptr<Integer> b = make_unique<B>(i);
-		objectList.push_back(b);
-		b->print(i);
+		counter++;
+		object->print(counter);
 	}
 	return 0;
 }
