@@ -12,9 +12,9 @@ using namespace std;
 class Integer {
 
 public:
-	virtual int getValue() { const = 0; }
+	virtual int getValue() const = 0 {}
 	virtual	void print(int position)
-		{cout << position << " " << getValue << " " << this << endl;}
+		{cout << position << " " << this->getValue() << " " << this << endl;}
 };
 
 
@@ -23,7 +23,7 @@ class A : public Integer {
 public:
 	A(int value)
 		{negativNumber = value;}
-	int getValue()
+	int getValue() const
 		{return negativNumber;}
 private:
 	int negativNumber;
@@ -35,7 +35,7 @@ class B : public Integer {
 public:
 	B(int value)
 		{positivNumber = value;}
-	int getValue()
+	int getValue() const
 		{return positivNumber;}
 private:
 	int unsigned positivNumber;
