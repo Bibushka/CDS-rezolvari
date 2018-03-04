@@ -44,7 +44,6 @@ private:
 
 void CreateList(unique_ptr<Integer>& objectList)
 {
-	list<unique_ptr<Integer>> objectList(10);
 	for (int i = 1; i <= 5; i++)
 		objectList.push_back(make_unique<A>(-i));
 	for (int i = 1; i <= 5; i++)
