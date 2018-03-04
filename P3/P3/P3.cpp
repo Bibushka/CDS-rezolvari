@@ -42,19 +42,44 @@ private:
 };
 
 
-int main()
+void CreateList(unique_ptr<Integer>& objectList)
 {
-	int counter = 0;
 	list<unique_ptr<Integer>> objectList(10);
 	for (int i = 1; i <= 5; i++)
 		objectList.push_back(make_unique<A>(-i));
 	for (int i = 1; i <= 5; i++)
 		objectList.push_back(make_unique<B>(i));
+}
+
+void PrintObjects(list<unique_ptr<Integer>>& objectList)
+{
+	int counter = 0;
 	for (const auto& object : objectList)
 	{
 		counter++;
 		object->print(counter);
 	}
+}
+
+void RemoveObjectFromPosition(list<unique_ptr<Integer>>& objectList)
+{
+	int counter = 0;
+	for (const auto& object : objectList)
+	{
+		if (counter == 1 || counter == objectList.size - 1)
+			objectList.remove(object);
+		counter++;
+	}
+}
+
+
+int main()
+{
+	list<unique_ptr<Integer>> objectList(10);
+	CreateList(objectList);
+	PrintObjects(objectList);
+	RemoveObjectFromPosition(objectList);
+	PrintObjects(objectList);
 	return 0;
 }
 
