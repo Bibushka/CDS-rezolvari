@@ -42,7 +42,7 @@ private:
 };
 
 
-void CreateList(unique_ptr<Integer>& objectList)
+void CreateList(list<unique_ptr<Integer>> objectList)
 {
 	for (int i = 1; i <= 5; i++)
 		objectList.push_back(make_unique<A>(-i));
@@ -62,11 +62,15 @@ void PrintObjects(list<unique_ptr<Integer>>& objectList)
 
 void RemoveObjectFromPosition(list<unique_ptr<Integer>>& objectList)
 {
+	list<unique_ptr<Integer>>::iterator it;
 	int counter = 0;
-	for (const auto& object : objectList)
+	for (it = objectList.begin(); it != objectList.end(); it++)
 	{
-		if (counter == 1 || counter == objectList.size - 1)
-			objectList.remove(object);
+		if (counter == 1 || counter == (objectList.size() - 2))
+		{
+			it = objectList.erase(it);
+			it--;
+		}
 		counter++;
 	}
 }
