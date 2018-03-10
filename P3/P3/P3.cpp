@@ -1,48 +1,35 @@
-
 // P3.cpp : Defines the entry point for the console application.
 //
 #include "stdafx.h"
 #include <iostream>
 #include <list>
 #include <memory>
-
 using namespace std;
 
-
 class Integer {
-
 public:
 	virtual int getValue() const = 0;
-	virtual	void print(int position)
-		{cout << position << " " << this->getValue() << " " << this << endl;}
+	virtual	void print(int position) {cout << position << " " << this->getValue() << " " << this << endl;}
 };
 
-
 class A : public Integer {
-
 public:
-	A(int value)
-		{negativNumber = value;}
-	int getValue() const
-		{return negativNumber;}
+	A(int value) {negativNumber = value;}
+	int getValue() const {return negativNumber;}
 private:
 	int negativNumber;
 };
 
-
 class B : public Integer {
-
 public:
-	B(int value)
-		{positivNumber = value;}
-	int getValue() const
-		{return positivNumber;}
+	B(int value) {positivNumber = value;}
+	int getValue() const {return positivNumber;}
 private:
 	int unsigned positivNumber;
 };
 
 
-void CreateList(list<unique_ptr<Integer>>& objectList)
+void createList(list<unique_ptr<Integer>>& objectList)
 {
 	for (int i = 1; i <= 5; i++)
 		objectList.push_back(make_unique<A>(-i));
@@ -50,36 +37,32 @@ void CreateList(list<unique_ptr<Integer>>& objectList)
 		objectList.push_back(make_unique<B>(i));
 }
 
-void PrintObjects(list<unique_ptr<Integer>>& objectList)
+void printObjects(list<unique_ptr<Integer>>& objectList)
 {
 	int counter = 0;
-	for (const auto& object : objectList)
+	for (unique_ptr<Integer> const& object : objectList) //const auto deduce implicit tipul corect
 	{
 		counter++;
 		object->print(counter);
 	}
 }
 
-void RemoveObjectFromPosition(list<unique_ptr<Integer>>& objectList)
+void removeObjectFromPosition(list<unique_ptr<Integer>>& objectList)
 {
 	list<unique_ptr<Integer>>::iterator it;
-	int counter = 0;
-	for (it = objectList.begin(); it != objectList.end(); it++)
-	{
-		if (counter == 1 || counter == (objectList.size() - 2))
+	for (it = objectList.begin(); it != objectList.end(); ++it)
+		if (it == next(objectList.begin(),1) || it == prev(objectList.end(),2)) 
 			it = objectList.erase(it);
-		counter++;
-	}
 }
 
 
 int main()
 {
 	list<unique_ptr<Integer>> objectList;
-	CreateList(objectList);
-	PrintObjects(objectList);
-	RemoveObjectFromPosition(objectList);
-	PrintObjects(objectList);
+	createList(objectList);
+	printObjects(objectList);
+	removeObjectFromPosition(objectList);
+	printObjects(objectList);
 	std::getchar();
 	return 0;
 }
