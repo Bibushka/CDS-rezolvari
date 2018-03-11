@@ -32,15 +32,16 @@ private:
 void createList(list<unique_ptr<Integer>>& objectList)
 {
 	for (int i = 1; i <= 5; i++)
-		objectList.push_back(make_unique<A>(-i));
-	for (int i = 1; i <= 5; i++)
+	{
+		objectList.push_front(make_unique<A>(i-6));
 		objectList.push_back(make_unique<B>(i));
+	}	
 }
 
 void printObjects(list<unique_ptr<Integer>>& objectList)
 {
 	int counter = 0;
-	for (unique_ptr<Integer> const& object : objectList) //const auto deduce implicit tipul corect
+	for (unique_ptr<Integer> const& object : objectList) 
 	{
 		counter++;
 		object->print(counter);
